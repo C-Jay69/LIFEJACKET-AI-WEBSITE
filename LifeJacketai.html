@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LifeJacket AI - SaaS Inventory + Demo Platform</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* Small, intentional enhancements beyond Tailwind */
+    .focus-ring:focus { outline: none; box-shadow: 0 0 0 4px rgba(59, 130, 246, .25); }
+    .glass { background: rgba(255,255,255,.75); backdrop-filter: blur(10px); }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-[#0f172a] font-sans">
+  <!-- Header -->
+  <header class="bg-white/90 backdrop-blur sticky top-0 z-50 border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="flex items-center gap-2">
+        <i class="fas fa-life-ring text-[#3b82f6] text-2xl"></i>
+        <span class="text-2xl font-extrabold text-[#1e40af] tracking-tight">LifeJacket AI</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="#inventory" class="hover:text-[#3b82f6] transition">Inventory</a>
+        <a href="#features" class="hover:text-[#3b82f6] transition">Features</a>
+        <a href="#how" class="hover:text-[#3b82f6] transition">How demos work</a>
+        <a href="#admin" class="hover:text-[#3b82f6] transition">Admin</a>
+        <a href="#contact" class="hover:text-[#3b82f6] transition">Contact</a>
+      </nav>
+      <button id="mobileMenuBtn" class="md:hidden text-2xl" aria-label="Open menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <!-- Mobile nav -->
+    <div id="mobileNav" class="hidden md:hidden border-t border-slate-100 bg-white">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-3 text-sm font-medium">
+        <a href="#inventory" class="py-2">Inventory</a>
+        <a href="#features" class="py-2">Features</a>
+        <a href="#how" class="py-2">How demos work</a>
+        <a href="#admin" class="py-2">Admin</a>
+        <a href="#contact" class="py-2">Contact</a>
+      </div>
+    </div>
+  </header>
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-[#3b82f6] to-[#1e40af] text-white">
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20 text-center">
+      <p class="inline-flex items-center gap-2 text-white/90 bg-white/10 border border-white/15 px-4 py-2 rounded-full text-sm mb-6">
+        <i class="fa-solid fa-compass"></i>
+        Curate your SaaS catalog. Run demos safely.
+      </p>
+      <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-6">Your SaaS lifeboat in digital waters</h1>
+      <p class="text-lg md:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+        Publish products, keep inventory clean and searchable, and let users try each item in a guided demo mode.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-3">
+        <a href="#inventory" class="bg-white text-[#1e40af] hover:bg-[#60a5fa] hover:text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-[1.02] focus-ring">Explore inventory</a>
+        <a href="#admin" class="bg-transparent border-2 border-white hover:bg-white hover:text-[#1e40af] font-bold py-3 px-8 rounded-full transition duration-300 focus-ring">Add a product</a>
+      </div>
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl mx-auto">
+        <div class="glass rounded-2xl p-4 text-left border border-white/20">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <div>
+              <div class="font-bold">Inventory-first</div>
+              <div class="text-white/80 text-sm">Search, tags, pricing, and details.</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-4 text-left border border-white/20">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center"><i class="fa-solid fa-play"></i></div>
+            <div>
+              <div class="font-bold">Demo mode</div>
+              <div class="text-white/80 text-sm">Embed a sandbox URL or use built-in demos.</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-4 text-left border border-white/20">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center"><i class="fa-solid fa-shield"></i></div>
+            <div>
+              <div class="font-bold">Safer evaluation</div>
+              <div class="text-white/80 text-sm">Demos run in a sandboxed frame.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Inventory -->
+  <section id="inventory" class="py-14 md:py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+        <div>
+          <h2 class="text-3xl font-black tracking-tight">SaaS inventory</h2>
+          <p class="text-slate-600 mt-2">Clean catalog UI with live search + per-product demo mode.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input id="searchInput" class="pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-white w-full sm:w-80 focus-ring" placeholder="Search products (name, tags, description)" />
+          </div>
+          <select id="tagFilter" class="px-4 py-3 rounded-xl border border-slate-200 bg-white focus-ring">
+            <option value="">All tags</option>
+          </select>
+        </div>
+      </div>
+      <div id="emptyState" class="hidden bg-white rounded-2xl border border-slate-200 p-8 text-center">
+        <div class="mx-auto w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
+          <i class="fa-solid fa-box-open text-slate-500 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold">No products yet</h3>
+        <p class="text-slate-600 mt-2 max-w-xl mx-auto">Go to <a class="text-[#3b82f6] font-semibold" href="#admin">Admin</a> to add your first product. You can use an iframe demo URL or a built-in demo type to start immediately.</p>
+      </div>
+      <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+  <!-- Features -->
+  <section id="features" class="py-14 md:py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-black tracking-tight text-center">Platform features</h2>
+      <p class="text-slate-600 text-center mt-3 max-w-3xl mx-auto">Designed for quick browsing and fast evaluation without confusing navigation.</p>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="rounded-2xl border border-slate-200 p-6">
+          <div class="w-12 h-12 rounded-xl bg-[#3b82f6] text-white flex items-center justify-center mb-4"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3 class="font-extrabold text-lg">Instant demos</h3>
+          <p class="text-slate-600 mt-2">Every inventory item can open a demo mode—either embedded sandbox or a built-in interactive demo.</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 p-6">
+          <div class="w-12 h-12 rounded-xl bg-[#1e40af] text-white flex items-center justify-center mb-4"><i class="fa-solid fa-list-check"></i></div>
+          <h3 class="font-extrabold text-lg">Inventory management</h3>
+          <p class="text-slate-600 mt-2">Add products, tags, pricing, and a demo configuration. Export/import JSON for portability.</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 p-6">
+          <div class="w-12 h-12 rounded-xl bg-[#60a5fa] text-white flex items-center justify-center mb-4"><i class="fa-solid fa-lock"></i></div>
+          <h3 class="font-extrabold text-lg">Safer evaluation</h3>
+          <p class="text-slate-600 mt-2">Iframe demos load in a sandboxed frame to reduce risk while still enabling hands-on exploration.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- How it works -->
+  <section id="how" class="py-14 md:py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div>
+          <h2 class="text-3xl font-black tracking-tight">How “demo mode” works</h2>
+          <p class="text-slate-600 mt-3">This site supports two demo styles. Pick the one that matches how your SaaS is delivered.</p>
+          <div class="mt-6 space-y-4">
+            <div class="bg-white rounded-2xl border border-slate-200 p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center mt-0.5"><i class="fa-solid fa-up-right-from-square text-slate-700"></i></div>
+                <div>
+                  <h3 class="font-extrabold">Iframe demo URL (recommended)</h3>
+                  <p class="text-slate-600 mt-1">Host a sandbox/staging version of your app and paste its URL into the product’s demo settings. The demo opens inside a modal in an iframe.</p>
+                  <ul class="mt-3 text-sm text-slate-600 space-y-1 list-disc pl-5">
+                    <li>Use a dedicated demo environment (subdomain) with sample data.</li>
+                    <li>Ensure your app allows embedding (no <code>X-Frame-Options: DENY</code> and CSP allows the site).</li>
+                    <li>Consider a demo login token or read-only role.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-2xl border border-slate-200 p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center mt-0.5"><i class="fa-solid fa-flask text-slate-700"></i></div>
+                <div>
+                  <h3 class="font-extrabold">Built-in interactive demo</h3>
+                  <p class="text-slate-600 mt-1">If you don’t have a deployable demo environment yet, choose a built-in demo type to showcase the vibe and flows (analytics / chat / security scan).</p>
+                  <p class="text-slate-600 mt-2 text-sm">This is a UI simulation (not your backend) but it’s instantly usable and keeps the site feeling alive.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-sm">
+          <h3 class="text-xl font-extrabold">Practical checklist for real SaaS demos</h3>
+          <ol class="mt-4 space-y-3 list-decimal pl-5 text-slate-700">
+            <li><span class="font-semibold">Create a sandbox deployment</span> (staging, preview, or demo subdomain).</li>
+            <li><span class="font-semibold">Seed safe sample data</span> (no production PII).</li>
+            <li><span class="font-semibold">Make it embeddable</span> (CSP + X-Frame-Options configured appropriately).</li>
+            <li><span class="font-semibold">Add a frictionless entry</span> (magic link, demo token, or guest account).</li>
+            <li><span class="font-semibold">Add guardrails</span> (read-only, rate limits, feature flags, and reset on session end).</li>
+          </ol>
+          <div class="mt-6 bg-slate-50 rounded-2xl p-4 border border-slate-200">
+            <div class="text-sm text-slate-700">
+              <div class="font-bold mb-1">Note</div>
+              Some apps can’t be embedded due to security headers. In that case you can still use this site: open demos in a new tab (we provide a fallback button).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Admin -->
+  <section id="admin" class="py-14 md:py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <h2 class="text-3xl font-black tracking-tight">Admin: upload products</h2>
+          <p class="text-slate-600 mt-2">This demo site stores products in <span class="font-semibold">your browser (localStorage)</span>. For a real production platform, you’d connect this UI to your database + auth.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button id="exportBtn" class="px-4 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 font-semibold focus-ring"><i class="fa-solid fa-file-export mr-2"></i>Export JSON</button>
+          <label class="px-4 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 font-semibold cursor-pointer inline-flex items-center justify-center focus-within:ring-4 focus-within:ring-blue-200">
+            <i class="fa-solid fa-file-import mr-2"></i>Import JSON
+            <input id="importInput" type="file" accept="application/json" class="hidden" />
+          </label>
+          <button id="resetBtn" class="px-4 py-3 rounded-xl border border-red-200 text-red-700 hover:bg-red-50 font-semibold focus-ring"><i class="fa-solid fa-rotate-left mr-2"></i>Reset</button>
+        </div>
+      </div>
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div class="rounded-3xl border border-slate-200 p-6">
+          <h3 class="text-xl font-extrabold">Add a product</h3>
+          <form id="productForm" class="mt-6 space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2" for="pName">Name</label>
+                <input id="pName" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus-ring" placeholder="e.g., InvoiceIQ" />
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2" for="pPrice">Price (monthly)</label>
+                <input id="pPrice" required type="number" min="0" step="1" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus-ring" placeholder="e.g., 49" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2" for="pDesc">Short description</label>
+              <textarea id="pDesc" required rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus-ring" placeholder="One sentence: what does it do and who is it for?"></textarea>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2" for="pTags">Tags</label>
+                <input id="pTags" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus-ring" placeholder="comma-separated (e.g., analytics, fintech, devtools)" />
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2" for="pIcon">Icon</label>
+                <select id="pIcon" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus-ring">
+                  <option value="fa-chart-line">Chart</option>
+                  <option value="fa-robot">Robot</option>
+                  <option value="fa-shield-halved">Shield</option>
+                  <option value="fa-credit-card">Payments</option>
+                  <option value="fa-gear">Settings</option>
+                  <option value="fa-comments">Chat</option>
+                  <option value="fa-database">Database</option>
+                  <option value="fa-wand-magic-sparkles">Magic</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2" for="pGradient">Card gradient</label>
+                <select id="pGradient" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus-ring">
+                  <option value="from-blue-400 to-indigo-600">Blue → Indigo</option>
+                  <option value="from-emerald-400 to-teal-600">Emerald → Teal</option>
+                  <option value="from-violet-400 to-fuchsia-600">Violet → Fuchsia</option>
+                  <option value="from-amber-400 to-orange-600">Amber → Orange</option>
+                  <option value="from-sky-400 to-blue-600">Sky → Blue</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2" for="pLogo">Logo (optional)</label>
+                <input id="pLogo" type="file" accept="image/*" class="w-full text-sm" />
+                <p class="text-xs text-slate-500 mt-1">Stored locally in your browser for this demo.</p>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-4 bg-slate-50">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-bold text-slate-700 mb-2" for="pDemoType">Demo mode type</label>
+                  <select id="pDemoType" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus-ring">
+                    <option value="builtin">Built-in interactive demo</option>
+                    <option value="iframe">Iframe demo URL</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-bold text-slate-700 mb-2" for="pBuiltin">Built-in demo template</label>
+                  <select id="pBuiltin" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus-ring">
+                    <option value="analytics">Analytics dashboard</option>
+                    <option value="assistant">AI assistant chat</option>
+                    <option value="security">Security scan</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mt-4" id="iframeUrlWrap">
+                <label class="block text-sm font-bold text-slate-700 mb-2" for="pDemoUrl">Iframe demo URL</label>
+                <input id="pDemoUrl" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus-ring" placeholder="https://demo.yourapp.com" />
+                <p class="text-xs text-slate-500 mt-1">If embedding is blocked by your app’s headers, users can open it in a new tab from the demo modal.</p>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+              <button class="flex-1 bg-[#3b82f6] hover:bg-[#1e40af] text-white font-extrabold py-3 px-5 rounded-xl transition focus-ring" type="submit">
+                <i class="fa-solid fa-plus mr-2"></i>Add to inventory
+              </button>
+              <button id="clearFormBtn" class="flex-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-extrabold py-3 px-5 rounded-xl transition focus-ring" type="button">
+                Clear
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="rounded-3xl border border-slate-200 p-6">
+          <div class="flex items-center justify-between gap-3">
+            <h3 class="text-xl font-extrabold">Current inventory</h3>
+            <span id="productCount" class="text-sm font-bold text-slate-600"></span>
+          </div>
+          <div id="adminList" class="mt-6 space-y-3 max-h-[520px] overflow-auto no-scrollbar pr-2"></div>
+          <p class="text-xs text-slate-500 mt-4">Tip: Export JSON to move your inventory to another device. Import JSON to restore it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Contact -->
+  <section id="contact" class="py-14 md:py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-black tracking-tight text-center">Get in touch</h2>
+      <p class="text-slate-600 text-center mt-3 max-w-2xl mx-auto">Want help setting up real demo sandboxes, authentication, or a database-backed inventory?</p>
+      <div class="max-w-2xl mx-auto bg-white rounded-3xl border border-slate-200 shadow-sm p-6 md:p-8 mt-10">
+        <form id="contactForm">
+          <div class="mb-5">
+            <label class="block text-slate-700 text-sm font-bold mb-2" for="name">Name</label>
+            <input class="w-full px-4 py-3 rounded-xl border border-slate-200 focus-ring" type="text" id="name" placeholder="Your name" required>
+          </div>
+          <div class="mb-5">
+            <label class="block text-slate-700 text-sm font-bold mb-2" for="email">Email</label>
+            <input class="w-full px-4 py-3 rounded-xl border border-slate-200 focus-ring" type="email" id="email" placeholder="you@company.com" required>
+          </div>
+          <div class="mb-6">
+            <label class="block text-slate-700 text-sm font-bold mb-2" for="message">Message</label>
+            <textarea class="w-full px-4 py-3 rounded-xl border border-slate-200 focus-ring" id="message" rows="5" placeholder="Tell us what you’re building and what kind of demo you need" required></textarea>
+          </div>
+          <button class="w-full bg-[#3b82f6] hover:bg-[#1e40af] text-white font-extrabold py-3 px-4 rounded-xl transition focus-ring" type="submit">
+            Send message
+          </button>
+          <p class="text-xs text-slate-500 mt-3">This is a front-end demo form (it won’t email). Hook it to your backend when you’re ready.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="bg-[#0f172a] text-white py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <div class="flex items-center gap-2">
+            <i class="fas fa-life-ring text-[#3b82f6] text-2xl"></i>
+            <h2 class="text-2xl font-extrabold">LifeJacket AI</h2>
+          </div>
+          <p class="mt-2 text-white/65">Keeping your business afloat with intelligent solutions</p>
+        </div>
+        <div class="flex space-x-6 text-white/65">
+          <a href="#" class="hover:text-white transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="hover:text-white transition" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" class="hover:text-white transition" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="border-t border-white/10 mt-8 pt-8 text-center text-white/55 text-sm">
+        <p>&copy; <span id="year"></span> LifeJacket AI. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- Demo Modal -->
+  <div id="demoModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[92vh] overflow-hidden">
+      <div class="p-5 md:p-6 border-b border-slate-200 flex items-center justify-between gap-4">
+        <div class="min-w-0">
+          <h3 id="demoTitle" class="text-xl md:text-2xl font-black truncate">Product demo</h3>
+          <p id="demoSub" class="text-sm text-slate-600 truncate"></p>
+        </div>
+        <button id="closeModal" class="w-11 h-11 rounded-xl border border-slate-200 hover:bg-slate-50 flex items-center justify-center" aria-label="Close demo">
+          <i class="fas fa-times text-lg text-slate-600"></i>
+        </button>
+      </div>
+      <div class="p-5 md:p-6">
+        <div class="flex flex-col lg:flex-row gap-5">
+          <div class="lg:w-1/3">
+            <div class="rounded-2xl border border-slate-200 p-5">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <div class="text-xs font-bold text-slate-500">PRICE</div>
+                  <div id="demoPrice" class="text-2xl font-black text-[#1e40af]">—</div>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center">
+                  <i id="demoIcon" class="fa-solid fa-cube text-slate-700 text-xl"></i>
+                </div>
+              </div>
+              <div class="mt-4">
+                <div class="text-xs font-bold text-slate-500">TAGS</div>
+                <div id="demoTags" class="mt-2 flex flex-wrap gap-2"></div>
+              </div>
+              <div class="mt-5 bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                <div class="text-xs font-bold text-slate-500">DEMO NOTES</div>
+                <p class="text-sm text-slate-700 mt-2">For real SaaS demos, point this product at a sandbox URL. For quick vibes, use a built-in interactive demo template.</p>
+              </div>
+              <div class="mt-5 flex flex-col gap-2">
+                <button id="openNewTabBtn" class="hidden px-4 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 font-extrabold text-slate-800 focus-ring" type="button">
+                  <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>Open demo in new tab
+                </button>
+                <button id="startTrialBtn" class="px-4 py-3 rounded-xl bg-[#3b82f6] hover:bg-[#1e40af] text-white font-extrabold focus-ring" type="button">
+                  <i class="fa-solid fa-rocket mr-2"></i>Start free trial
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="lg:w-2/3">
+            <div class="rounded-2xl border border-slate-200 overflow-hidden">
+              <div class="bg-slate-50 border-b border-slate-200 p-3 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                  <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-xs font-extrabold text-slate-700">
+                    <i class="fa-solid fa-play"></i>
+                    Demo mode
+                  </span>
+                  <span id="demoTypeBadge" class="text-xs font-bold text-slate-500"></span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button id="refreshDemoBtn" class="px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-sm font-bold focus-ring" type="button">
+                    <i class="fa-solid fa-rotate mr-2"></i>Reset demo
+                  </button>
+                </div>
+              </div>
+              <!-- Iframe demo -->
+              <div id="iframeWrap" class="hidden">
+                <iframe id="demoFrame" title="Product demo" class="w-full h-[60vh] bg-white" sandbox="allow-forms allow-scripts allow-same-origin allow-popups"></iframe>
+                <div id="iframeHint" class="p-4 bg-white border-t border-slate-200 text-sm text-slate-700 hidden">
+                  Embedding may be blocked by the app’s security headers. Use “Open demo in new tab”.
+                </div>
+              </div>
+              <!-- Built-in demos -->
+              <div id="builtinWrap" class="p-5 md:p-6 bg-white h-[60vh] overflow-auto no-scrollbar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] hidden"></div>
+  <script>
+    // ----------------------------
+    // LifeJacket AI Inventory + Demo Platform (front-end demo)
+    // ----------------------------
+    const STORAGE_KEY = 'ljai_products_v1';
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 'analytics-pro',
+        name: 'Analytics Pro',
+        description: 'Advanced business intelligence with predictive analytics',
+        priceMonthly: 49,
+        tags: ['analytics', 'bi', 'dashboards'],
+        icon: 'fa-chart-line',
+        gradient: 'from-blue-400 to-indigo-600',
+        logoDataUrl: '',
+        demo: { type: 'builtin', builtin: 'analytics', url: '' }
+      },
+      {
+        id: 'ai-assistant',
+        name: 'AI Assistant',
+        description: 'Intelligent customer support automation solution',
+        priceMonthly: 79,
+        tags: ['support', 'automation', 'ai'],
+        icon: 'fa-robot',
+        gradient: 'from-emerald-400 to-teal-600',
+        logoDataUrl: '',
+        demo: { type: 'builtin', builtin: 'assistant', url: '' }
+      },
+      {
+        id: 'security-suite',
+        name: 'Security Suite',
+        description: 'Comprehensive cybersecurity protection for enterprises',
+        priceMonthly: 129,
+        tags: ['security', 'compliance', 'risk'],
+        icon: 'fa-shield-halved',
+        gradient: 'from-violet-400 to-fuchsia-600',
+        logoDataUrl: '',
+        demo: { type: 'builtin', builtin: 'security', url: '' }
+      }
+    ];
+    let products = [];
+    let activeDemoProductId = null;
+    const el = (id) => document.getElementById(id);
+    function slugify(str) {
+      return String(str)
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)+/g, '');
+    }
+    function safeParseJSON(text) {
+      try { return JSON.parse(text); } catch { return null; }
+    }
+    function loadProducts() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return structuredClone(DEFAULT_PRODUCTS);
+      const parsed = safeParseJSON(raw);
+      if (!Array.isArray(parsed)) return structuredClone(DEFAULT_PRODUCTS);
+      return parsed;
+    }
+    function saveProducts() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+    }
+    function money(n) {
+      const val = Number(n);
+      if (!Number.isFinite(val)) return '$0';
+      return `$${val}`;
+    }
+    function uniqTags(items) {
+      const s = new Set();
+      items.forEach(p => (p.tags || []).forEach(t => s.add(String(t).toLowerCase())));
+      return Array.from(s).sort((a,b) => a.localeCompare(b));
+    }
+    function renderTagFilter() {
+      const tagSelect = el('tagFilter');
+      const tags = uniqTags(products);
+      const current = tagSelect.value;
+      tagSelect.innerHTML = '<option value="">All tags</option>' + tags.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+      // keep selection if possible
+      if (tags.includes(current)) tagSelect.value = current;
+    }
+    function matchesQuery(p, q, tag) {
+      const hay = `${p.name} ${p.description} ${(p.tags || []).join(' ')}`.toLowerCase();
+      const okQuery = !q || hay.includes(q);
+      const okTag = !tag || (p.tags || []).map(t => String(t).toLowerCase()).includes(tag);
+      return okQuery && okTag;
+    }
+    function escapeHtml(s) {
+      return String(s)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+    function productCard(p) {
+      const tags = (p.tags || []).slice(0, 3);
+      const tagPills = tags.map(t => `<span class="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">${escapeHtml(t)}</span>`).join('');
+      const logo = p.logoDataUrl
+        ? `<img src="${p.logoDataUrl}" alt="${escapeHtml(p.name)} logo" class="w-12 h-12 rounded-2xl object-cover border border-white/30" />`
+        : `<div class="w-12 h-12 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center"><i class="fa-solid ${escapeHtml(p.icon)} text-white text-xl"></i></div>`;
+      return `
+        <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition">
+          <div class="h-36 bg-gradient-to-r ${escapeHtml(p.gradient)} flex items-center justify-between px-5">
+            ${logo}
+            <span class="text-white/90 text-xs font-extrabold px-3 py-1 rounded-full bg-white/15 border border-white/20">Demo ready</span>
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-black tracking-tight">${escapeHtml(p.name)}</h3>
+            <p class="text-slate-600 mt-2">${escapeHtml(p.description)}</p>
+            <div class="mt-4 flex flex-wrap gap-2">${tagPills || ''}</div>
+            <div class="mt-5 flex items-center justify-between gap-3">
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-slate-500">FROM</div>
+                <div class="text-2xl font-black text-[#3b82f6]">${money(p.priceMonthly)}<span class="text-sm text-slate-500 font-bold">/mo</span></div>
+              </div>
+              <div class="flex gap-2">
+                <button data-action="open-demo" data-id="${escapeHtml(p.id)}" class="px-4 py-2.5 rounded-xl bg-[#3b82f6] hover:bg-[#1e40af] text-white font-extrabold transition focus-ring">
+                  <i class="fa-solid fa-play mr-2"></i>Demo
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+    function renderProducts() {
+      const q = el('searchInput').value.trim().toLowerCase();
+      const tag = el('tagFilter').value.trim().toLowerCase();
+      const grid = el('productGrid');
+      const shown = products.filter(p => matchesQuery(p, q, tag));
+      el('emptyState').classList.toggle('hidden', shown.length !== 0);
+      grid.innerHTML = shown.map(productCard).join('');
+      // Wire demo buttons
+      grid.querySelectorAll('[data-action="open-demo"]').forEach(btn => {
+        btn.addEventListener('click', () => openDemo(btn.dataset.id));
+      });
+    }
+    function adminRow(p) {
+      const demoTypeLabel = p.demo?.type === 'iframe' ? 'iframe URL' : `built-in: ${p.demo?.builtin || '—'}`;
+      const tagText = (p.tags || []).join(', ');
+      return `
+        <div class="rounded-2xl border border-slate-200 p-4 bg-white">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-slate-100 border border-slate-200">
+                  <i class="fa-solid ${escapeHtml(p.icon)} text-slate-700"></i>
+                </span>
+                <div class="min-w-0">
+                  <div class="font-extrabold truncate">${escapeHtml(p.name)}</div>
+                  <div class="text-xs text-slate-500 font-bold">${money(p.priceMonthly)}/mo • ${escapeHtml(demoTypeLabel)}</div>
+                </div>
+              </div>
+              <div class="text-sm text-slate-600 mt-2">${escapeHtml(p.description)}</div>
+              ${tagText ? `<div class="text-xs text-slate-500 mt-2"><span class="font-bold">Tags:</span> ${escapeHtml(tagText)}</div>` : ''}
+            </div>
+            <div class="flex flex-col gap-2">
+              <button data-action="admin-demo" data-id="${escapeHtml(p.id)}" class="px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 font-extrabold text-sm focus-ring">
+                Demo
+              </button>
+              <button data-action="admin-delete" data-id="${escapeHtml(p.id)}" class="px-3 py-2 rounded-xl border border-red-200 text-red-700 hover:bg-red-50 font-extrabold text-sm focus-ring">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    function renderAdminList() {
+      el('productCount').textContent = `${products.length} product${products.length === 1 ? '' : 's'}`;
+      const wrap = el('adminList');
+      wrap.innerHTML = products.map(adminRow).join('') || '<div class="text-slate-600 text-sm">No products yet. Add one on the left.</div>';
+      wrap.querySelectorAll('[data-action="admin-delete"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          const p = products.find(x => x.id === id);
+          if (!p) return;
+          if (!confirm(`Delete “${p.name}”?`)) return;
+          products = products.filter(x => x.id !== id);
+          saveProducts();
+          renderAll();
+          toast('Product deleted.');
+        });
+      });
+      wrap.querySelectorAll('[data-action="admin-demo"]').forEach(btn => {
+        btn.addEventListener('click', () => openDemo(btn.dataset.id));
+      });
+    }
+    function renderAll() {
+      renderTagFilter();
+      renderProducts();
+      renderAdminList();
+    }
+    // ----------------------------
+    // Demo modal
+    // ----------------------------
+    function setModalVisible(visible) {
+      const modal = el('demoModal');
+      if (visible) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+    }
+    function openDemo(productId) {
+      const p = products.find(x => x.id === productId);
+      if (!p) return;
+      activeDemoProductId = p.id;
+      el('demoTitle').textContent = p.name;
+      el('demoSub').textContent = p.description;
+      el('demoPrice').textContent = `${money(p.priceMonthly)}/mo`;
+      // Icon
+      el('demoIcon').className = `fa-solid ${p.icon} text-slate-700 text-xl`;
+      // Tags
+      const tagWrap = el('demoTags');
+      const tags = (p.tags || []).map(t => `<span class="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">${escapeHtml(t)}</span>`).join('');
+      tagWrap.innerHTML = tags || '<span class="text-xs text-slate-500">No tags</span>';
+      // Demo rendering
+      const demoType = p.demo?.type || 'builtin';
+      el('demoTypeBadge').textContent = demoType === 'iframe' ? 'iframe demo' : 'built-in demo';
+      el('openNewTabBtn').classList.toggle('hidden', demoType !== 'iframe' || !p.demo?.url);
+      if (demoType === 'iframe' && p.demo?.url) {
+        el('iframeWrap').classList.remove('hidden');
+        el('builtinWrap').classList.add('hidden');
+        loadIframeDemo(p.demo.url);
+      } else {
+        el('iframeWrap').classList.add('hidden');
+        el('builtinWrap').classList.remove('hidden');
+        renderBuiltinDemo(p);
+      }
+      setModalVisible(true);
+      el('closeModal').focus();
+    }
+    function closeDemo() {
+      activeDemoProductId = null;
+      // stop iframe
+      el('demoFrame').src = 'about:blank';
+      el('iframeHint').classList.add('hidden');
+      setModalVisible(false);
+    }
+    function loadIframeDemo(url) {
+      const frame = el('demoFrame');
+      const hint = el('iframeHint');
+      hint.classList.add('hidden');
+      // Best-effort: set src; if embedding is blocked, browser will show an error.
+      frame.src = url;
+      // Some browsers allow checking if it loaded; many cross-origin limitations exist.
+      // We'll show a helpful hint after a short delay (non-intrusive).
+      setTimeout(() => {
+        // Always show hint; it’s useful even when it works.
+        hint.classList.remove('hidden');
+      }, 1200);
+      el('openNewTabBtn').onclick = () => window.open(url, '_blank', 'noopener,noreferrer');
+    }
+    function renderBuiltinDemo(p) {
+      const wrap = el('builtinWrap');
+      const kind = p.demo?.builtin || 'analytics';
+      if (kind === 'assistant') {
+        wrap.innerHTML = assistantDemoHtml(p.name);
+        wireAssistantDemo(wrap);
+      } else if (kind === 'security') {
+        wrap.innerHTML = securityDemoHtml(p.name);
+        wireSecurityDemo(wrap);
+      } else {
+        wrap.innerHTML = analyticsDemoHtml(p.name);
+        wireAnalyticsDemo(wrap);
+      }
+    }
+    // Built-in demo: Analytics
+    function analyticsDemoHtml(productName) {
+      return `
+        <div class="flex flex-col gap-5">
+          <div>
+            <h4 class="text-lg font-extrabold">${escapeHtml(productName)} — Analytics demo</h4>
+            <p class="text-slate-600 mt-1">Adjust the timeframe and watch KPIs + trend update. This is an interactive simulation.</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-xs font-bold text-slate-500">MRR</div>
+              <div id="kpiMrr" class="text-2xl font-black mt-1">$84,200</div>
+              <div id="kpiMrrDelta" class="text-sm font-bold text-emerald-600 mt-1">+6.1%</div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-xs font-bold text-slate-500">CHURN</div>
+              <div id="kpiChurn" class="text-2xl font-black mt-1">2.4%</div>
+              <div id="kpiChurnDelta" class="text-sm font-bold text-emerald-600 mt-1">-0.4%</div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-xs font-bold text-slate-500">ACTIVE USERS</div>
+              <div id="kpiUsers" class="text-2xl font-black mt-1">18,930</div>
+              <div id="kpiUsersDelta" class="text-sm font-bold text-emerald-600 mt-1">+3.7%</div>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-slate-200 p-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <div class="text-xs font-bold text-slate-500">TIMEFRAME</div>
+                <div id="tfLabel" class="font-extrabold">Last 30 days</div>
+              </div>
+              <div class="flex items-center gap-3">
+                <input id="tfRange" type="range" min="0" max="3" step="1" value="1" class="w-56" aria-label="Timeframe" />
+                <button id="randomizeBtn" class="px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 font-extrabold text-sm focus-ring" type="button">
+                  <i class="fa-solid fa-dice mr-2"></i>Randomize
+                </button>
+              </div>
+            </div>
+            <div class="mt-4">
+              <canvas id="trendChart" height="110" class="w-full"></canvas>
+              <p class="text-xs text-slate-500 mt-2">Trend chart is generated locally in the browser.</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    function wireAnalyticsDemo(root) {
+      const tfRange = root.querySelector('#tfRange');
+      const tfLabel = root.querySelector('#tfLabel');
+      const randomizeBtn = root.querySelector('#randomizeBtn');
+      const chart = root.querySelector('#trendChart');
+      const ctx = chart.getContext('2d');
+      const timeframes = [
+        { label: 'Last 7 days', points: 14 },
+        { label: 'Last 30 days', points: 30 },
+        { label: 'Last 90 days', points: 36 },
+        { label: 'Last 12 months', points: 24 }
+      ];
+      let seed = 42;
+      function rand() {
+        // deterministic-ish PRNG
+        seed = (seed * 1664525 + 1013904223) % 4294967296;
+        return seed / 4294967296;
+      }
+      function genSeries(n, base, volatility) {
+        let v = base;
+        const arr = [];
+        for (let i = 0; i < n; i++) {
+          v = v + (rand() - 0.48) * volatility;
+          arr.push(Math.max(0, v));
+        }
+        return arr;
+      }
+      function drawSpark(values) {
+        const w = chart.width = chart.clientWidth * devicePixelRatio;
+        const h = chart.height = 110 * devicePixelRatio;
+        ctx.clearRect(0, 0, w, h);
+        const padding = 10 * devicePixelRatio;
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const span = Math.max(1, max - min);
+        const xStep = (w - padding * 2) / (values.length - 1);
+        // area
+        ctx.beginPath();
+        values.forEach((v, i) => {
+          const x = padding + i * xStep;
+          const y = padding + (h - padding * 2) * (1 - (v - min) / span);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.lineTo(w - padding, h - padding);
+        ctx.lineTo(padding, h - padding);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(59,130,246,0.12)';
+        ctx.fill();
+        // line
+        ctx.beginPath();
+        values.forEach((v, i) => {
+          const x = padding + i * xStep;
+          const y = padding + (h - padding * 2) * (1 - (v - min) / span);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.strokeStyle = 'rgba(30,64,175,0.95)';
+        ctx.lineWidth = 2.5 * devicePixelRatio;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      }
+      function setKpis(mult) {
+        const mrr = Math.round(84200 * mult);
+        const users = Math.round(18930 * (0.85 + mult * 0.25));
+        const churn = (2.4 - (mult - 1) * 0.6).toFixed(1);
+        root.querySelector('#kpiMrr').textContent = `$${mrr.toLocaleString()}`;
+        root.querySelector('#kpiUsers').textContent = `${users.toLocaleString()}`;
+        root.querySelector('#kpiChurn').textContent = `${churn}%`;
+        const mrrDelta = (6.1 * (mult - 0.8)).toFixed(1);
+        const usersDelta = (3.7 * (mult - 0.8)).toFixed(1);
+        const churnDelta = (-0.4 * (mult - 0.8)).toFixed(1);
+        root.querySelector('#kpiMrrDelta').textContent = `${mrrDelta >= 0 ? '+' : ''}${mrrDelta}%`;
+        root.querySelector('#kpiUsersDelta').textContent = `${usersDelta >= 0 ? '+' : ''}${usersDelta}%`;
+        root.querySelector('#kpiChurnDelta').textContent = `${churnDelta >= 0 ? '+' : ''}${churnDelta}%`;
+        root.querySelector('#kpiMrrDelta').className = `text-sm font-bold mt-1 ${mrrDelta >= 0 ? 'text-emerald-600' : 'text-red-600'}`;
+        root.querySelector('#kpiUsersDelta').className = `text-sm font-bold mt-1 ${usersDelta >= 0 ? 'text-emerald-600' : 'text-red-600'}`;
+        root.querySelector('#kpiChurnDelta').className = `text-sm font-bold mt-1 ${churnDelta <= 0 ? 'text-emerald-600' : 'text-red-600'}`;
+      }
+      function refresh() {
+        const tf = timeframes[Number(tfRange.value)];
+        tfLabel.textContent = tf.label;
+        const mult = 0.9 + Number(tfRange.value) * 0.08 + rand() * 0.04;
+        setKpis(mult);
+        const series = genSeries(tf.points, 50 * mult, 6 + Number(tfRange.value) * 2);
+        drawSpark(series);
+      }
+      tfRange.addEventListener('input', refresh);
+      randomizeBtn.addEventListener('click', () => { seed = Math.floor(Math.random() * 100000) + 1; refresh(); });
+      window.addEventListener('resize', refresh);
+      refresh();
+    }
+    // Built-in demo: Assistant
+    function assistantDemoHtml(productName) {
+      return `
+        <div class="flex flex-col gap-5">
+          <div>
+            <h4 class="text-lg font-extrabold">${escapeHtml(productName)} — Assistant demo</h4>
+            <p class="text-slate-600 mt-1">Try a few messages. This is a safe, local simulation (no external AI calls).</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 border-b border-slate-200 p-4 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-[#3b82f6] text-white flex items-center justify-center"><i class="fa-solid fa-robot"></i></div>
+                <div>
+                  <div class="font-extrabold">Support Concierge</div>
+                  <div class="text-xs text-slate-500 font-bold">Demo bot • responds instantly</div>
+                </div>
+              </div>
+              <button id="assistantReset" class="px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-sm font-bold focus-ring" type="button">Reset</button>
+            </div>
+            <div id="chatLog" class="p-4 h-[38vh] overflow-auto bg-white no-scrollbar space-y-3"></div>
+            <form id="chatForm" class="p-4 bg-white border-t border-slate-200 flex gap-2">
+              <input id="chatInput" class="flex-1 px-4 py-3 rounded-xl border border-slate-200 focus-ring" placeholder="Ask about pricing, integrations, onboarding..." />
+              <button class="px-4 py-3 rounded-xl bg-[#3b82f6] hover:bg-[#1e40af] text-white font-extrabold transition focus-ring" type="submit">Send</button>
+            </form>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <button data-suggest="Show me the pricing tiers" class="px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 font-extrabold text-sm focus-ring" type="button">Pricing</button>
+            <button data-suggest="What integrations do you support?" class="px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 font-extrabold text-sm focus-ring" type="button">Integrations</button>
+            <button data-suggest="How fast can we onboard?" class="px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 font-extrabold text-sm focus-ring" type="button">Onboarding</button>
+          </div>
+        </div>
+      `;
+    }
+    function wireAssistantDemo(root) {
+      const log = root.querySelector('#chatLog');
+      const input = root.querySelector('#chatInput');
+      const form = root.querySelector('#chatForm');
+      function addMsg(who, text) {
+        const isUser = who === 'user';
+        const row = document.createElement('div');
+        row.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+        row.innerHTML = `
+          <div class="max-w-[85%] rounded-2xl px-4 py-3 border ${isUser ? 'bg-[#3b82f6] text-white border-[#3b82f6]' : 'bg-white text-slate-800 border-slate-200'}">
+            <div class="text-sm font-bold ${isUser ? 'text-white/90' : 'text-slate-500'}">${isUser ? 'You' : 'Assistant'}</div>
+            <div class="mt-1">${escapeHtml(text)}</div>
+          </div>
+        `;
+        log.appendChild(row);
+        log.scrollTop = log.scrollHeight;
+      }
+      function reply(text) {
+        const t = text.toLowerCase();
+        if (t.includes('price') || t.includes('pricing') || t.includes('tiers')) {
+          return 'Pricing is flexible: Starter for small teams, Growth for scaling ops, and Enterprise for compliance + dedicated support. Want me to recommend a tier based on seats and volume?';
+        }
+        if (t.includes('integration') || t.includes('api') || t.includes('webhook')) {
+          return 'Integrations include Slack, Zendesk, HubSpot, and a REST API with webhooks. If you tell me your stack, I’ll map the quickest path.';
+        }
+        if (t.includes('onboard') || t.includes('setup') || t.includes('implement')) {
+          return 'Typical onboarding is 30–90 minutes for the basics. Enterprise rollouts depend on SSO + data connectors, but we can stage it safely with a sandbox first.';
+        }
+        if (t.includes('demo')) {
+          return 'In a real deployment, I’d run against your sandbox environment with sample data. Here, I’m a local simulation to demonstrate the flow.';
+        }
+        return 'Got it. Tell me what outcome you want (reduce support load, increase conversions, improve security posture), and I’ll suggest the best workflow to start.';
+      }
+      function reset() {
+        log.innerHTML = '';
+        addMsg('assistant', 'Hi — I’m the demo assistant. Ask me about pricing, onboarding, or integrations.');
+        addMsg('assistant', 'Tip: This is a safe simulation. For real demos, connect this product to your sandbox URL in Admin.');
+      }
+      root.querySelector('#assistantReset').addEventListener('click', reset);
+      root.querySelectorAll('[data-suggest]').forEach(btn => btn.addEventListener('click', () => {
+        input.value = btn.dataset.suggest;
+        input.focus();
+      }));
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const msg = input.value.trim();
+        if (!msg) return;
+        input.value = '';
+        addMsg('user', msg);
+        setTimeout(() => addMsg('assistant', reply(msg)), 200);
+      });
+      reset();
+      input.focus();
+    }
+    // Built-in demo: Security
+    function securityDemoHtml(productName) {
+      return `
+        <div class="flex flex-col gap-5">
+          <div>
+            <h4 class="text-lg font-extrabold">${escapeHtml(productName)} — Security scan demo</h4>
+            <p class="text-slate-600 mt-1">Run a simulated scan to preview the experience. Results are generated locally.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 p-5">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2" for="scanTarget">Target</label>
+                <input id="scanTarget" class="w-full sm:w-[420px] px-4 py-3 rounded-xl border border-slate-200 focus-ring" value="api.yourcompany.com" />
+              </div>
+              <div class="flex gap-2">
+                <button id="runScanBtn" class="px-4 py-3 rounded-xl bg-[#3b82f6] hover:bg-[#1e40af] text-white font-extrabold transition focus-ring" type="button">
+                  <i class="fa-solid fa-radar mr-2"></i>Run scan
+                </button>
+                <button id="clearScanBtn" class="px-4 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 font-extrabold text-slate-800 focus-ring" type="button">Clear</button>
+              </div>
+            </div>
+            <div class="mt-5">
+              <div class="text-xs font-bold text-slate-500">PROGRESS</div>
+              <div class="mt-2 w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                <div id="scanBar" class="h-full w-0 bg-gradient-to-r from-[#3b82f6] to-[#1e40af]"></div>
+              </div>
+              <div id="scanStatus" class="text-sm text-slate-600 mt-2">Ready.</div>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-slate-200 p-5">
+            <div class="flex items-center justify-between">
+              <h5 class="font-extrabold">Findings</h5>
+              <span id="findingCount" class="text-xs font-extrabold text-slate-500">0</span>
+            </div>
+            <div id="findings" class="mt-4 space-y-3 text-sm"></div>
+          </div>
+          <div class="text-xs text-slate-500">Security reminder: real scanners should respect scope and authorization.</div>
+        </div>
+      `;
+    }
+    function wireSecurityDemo(root) {
+      const bar = root.querySelector('#scanBar');
+      const status = root.querySelector('#scanStatus');
+      const findingsWrap = root.querySelector('#findings');
+      const findingCount = root.querySelector('#findingCount');
+      const target = root.querySelector('#scanTarget');
+      let timer = null;
+      function setFindings(items) {
+        findingCount.textContent = String(items.length);
+        if (!items.length) {
+          findingsWrap.innerHTML = '<div class="text-slate-500">No findings yet.</div>';
+          return;
+        }
+        findingsWrap.innerHTML = items.map(f => {
+          const color = f.severity === 'High' ? 'text-red-700 bg-red-50 border-red-200'
+            : f.severity === 'Medium' ? 'text-amber-700 bg-amber-50 border-amber-200'
+            : 'text-emerald-700 bg-emerald-50 border-emerald-200';
+          return `
+            <div class="rounded-2xl border p-4 ${color}">
+              <div class="flex items-center justify-between gap-3">
+                <div class="font-extrabold">${escapeHtml(f.title)}</div>
+                <span class="text-xs font-extrabold px-2.5 py-1 rounded-full border">${escapeHtml(f.severity)}</span>
+              </div>
+              <div class="mt-2 text-slate-700">${escapeHtml(f.detail)}</div>
+              <div class="mt-2 text-xs font-bold text-slate-600">Recommendation: ${escapeHtml(f.fix)}</div>
+            </div>
+          `;
+        }).join('');
+      }
+      function reset() {
+        if (timer) { clearInterval(timer); timer = null; }
+        bar.style.width = '0%';
+        status.textContent = 'Ready.';
+        setFindings([]);
+      }
+      function run() {
+        reset();
+        const t = target.value.trim() || 'target';
+        status.textContent = `Scanning ${t}...`;
+        let p = 0;
+        timer = setInterval(() => {
+          p += Math.random() * 18;
+          bar.style.width = `${Math.min(100, p)}%`;
+          if (p >= 100) {
+            clearInterval(timer);
+            timer = null;
+            status.textContent = `Scan complete for ${t}.`;
+            const results = [
+              { severity: 'High', title: 'Public admin endpoint', detail: `An administrative route appears accessible without role checks on ${t}.`, fix: 'Require auth + enforce RBAC and network restrictions.' },
+              { severity: 'Medium', title: 'Outdated TLS config', detail: 'TLS configuration supports older ciphers on one edge node.', fix: 'Disable legacy ciphers and enforce modern TLS policies.' },
+              { severity: 'Low', title: 'Missing security headers', detail: 'Recommended HTTP security headers are incomplete on some responses.', fix: 'Add CSP, HSTS, and frame protections aligned to your app.' }
+            ].sort(() => Math.random() - 0.5);
+            setFindings(results);
+          }
+        }, 240);
+      }
+      root.querySelector('#runScanBtn').addEventListener('click', run);
+      root.querySelector('#clearScanBtn').addEventListener('click', reset);
+      reset();
+    }
+    // ----------------------------
+    // Admin / form handlers
+    // ----------------------------
+    async function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ''));
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+    function getUniqueId(base) {
+      let id = base || 'product';
+      let i = 2;
+      const used = new Set(products.map(p => p.id));
+      while (used.has(id)) {
+        id = `${base}-${i}`;
+        i++;
+      }
+      return id;
+    }
+    function normalizeTags(str) {
+      return String(str || '')
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean)
+        .map(s => s.toLowerCase());
+    }
+    function updateDemoTypeUi() {
+      const type = el('pDemoType').value;
+      const iframeWrap = el('iframeUrlWrap');
+      const builtin = el('pBuiltin');
+      const demoUrl = el('pDemoUrl');
+      if (type === 'iframe') {
+        iframeWrap.classList.remove('hidden');
+        builtin.disabled = true;
+        demoUrl.required = true;
+      } else {
+        iframeWrap.classList.add('hidden');
+        builtin.disabled = false;
+        demoUrl.required = false;
+      }
+    }
+    function clearForm() {
+      el('pName').value = '';
+      el('pPrice').value = '';
+      el('pDesc').value = '';
+      el('pTags').value = '';
+      el('pIcon').value = 'fa-chart-line';
+      el('pGradient').value = 'from-blue-400 to-indigo-600';
+      el('pLogo').value = '';
+      el('pDemoType').value = 'builtin';
+      el('pBuiltin').value = 'analytics';
+      el('pDemoUrl').value = '';
+      updateDemoTypeUi();
+    }
+    function toast(message) {
+      const t = el('toast');
+      t.innerHTML = `
+        <div class="bg-[#0f172a] text-white px-4 py-3 rounded-2xl shadow-xl border border-white/10 text-sm font-bold">
+          ${escapeHtml(message)}
+        </div>
+      `;
+      t.classList.remove('hidden');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => t.classList.add('hidden'), 2200);
+    }
+    function download(filename, content, mime = 'application/json') {
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+    // ----------------------------
+    // Global wiring
+    // ----------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      el('year').textContent = new Date().getFullYear();
+      products = loadProducts();
+      // Search + filter
+      el('searchInput').addEventListener('input', renderProducts);
+      el('tagFilter').addEventListener('change', renderProducts);
+      // Demo modal close
+      el('closeModal').addEventListener('click', closeDemo);
+      el('demoModal').addEventListener('click', (e) => {
+        if (e.target === el('demoModal')) closeDemo();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !el('demoModal').classList.contains('hidden')) closeDemo();
+      });
+      el('refreshDemoBtn').addEventListener('click', () => {
+        if (!activeDemoProductId) return;
+        openDemo(activeDemoProductId);
+        toast('Demo reset.');
+      });
+      el('startTrialBtn').addEventListener('click', () => {
+        toast('Wire this button to your signup / checkout flow.');
+      });
+      // Mobile menu
+      el('mobileMenuBtn').addEventListener('click', () => {
+        const nav = el('mobileNav');
+        const open = nav.classList.contains('hidden');
+        nav.classList.toggle('hidden');
+        el('mobileMenuBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      el('mobileNav').querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        el('mobileNav').classList.add('hidden');
+        el('mobileMenuBtn').setAttribute('aria-expanded', 'false');
+      }));
+      // Admin demo type UI
+      el('pDemoType').addEventListener('change', updateDemoTypeUi);
+      updateDemoTypeUi();
+      el('clearFormBtn').addEventListener('click', clearForm);
+      // Admin add product
+      el('productForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = el('pName').value.trim();
+        const priceMonthly = Number(el('pPrice').value);
+        const description = el('pDesc').value.trim();
+        const tags = normalizeTags(el('pTags').value);
+        const icon = el('pIcon').value;
+        const gradient = el('pGradient').value;
+        const demoType = el('pDemoType').value;
+        const builtin = el('pBuiltin').value;
+        const demoUrl = el('pDemoUrl').value.trim();
+        let logoDataUrl = '';
+        const file = el('pLogo').files && el('pLogo').files[0];
+        if (file) {
+          try { logoDataUrl = await fileToDataUrl(file); }
+          catch { logoDataUrl = ''; }
+        }
+        const baseId = slugify(name);
+        const id = getUniqueId(baseId);
+        const product = {
+          id,
+          name,
+          description,
+          priceMonthly: Number.isFinite(priceMonthly) ? priceMonthly : 0,
+          tags,
+          icon,
+          gradient,
+          logoDataUrl,
+          demo: {
+            type: demoType,
+            builtin: demoType === 'builtin' ? builtin : '',
+            url: demoType === 'iframe' ? demoUrl : ''
+          }
+        };
+        products.unshift(product);
+        saveProducts();
+        renderAll();
+        clearForm();
+        toast('Product added to inventory.');
+        location.hash = '#inventory';
+      });
+      // Export / import / reset
+      el('exportBtn').addEventListener('click', () => {
+        download('lifejacket-ai-inventory.json', JSON.stringify(products, null, 2));
+        toast('Exported JSON.');
+      });
+      el('importInput').addEventListener('change', async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const text = await file.text();
+        const parsed = safeParseJSON(text);
+        if (!Array.isArray(parsed)) {
+          toast('Import failed: invalid JSON format.');
+          e.target.value = '';
+          return;
+        }
+        // minimal normalization
+        products = parsed.map(p => ({
+          id: String(p.id || slugify(p.name || 'product')),
+          name: String(p.name || 'Untitled'),
+          description: String(p.description || ''),
+          priceMonthly: Number(p.priceMonthly || 0),
+          tags: Array.isArray(p.tags) ? p.tags.map(x => String(x).toLowerCase()) : [],
+          icon: String(p.icon || 'fa-cube'),
+          gradient: String(p.gradient || 'from-sky-400 to-blue-600'),
+          logoDataUrl: String(p.logoDataUrl || ''),
+          demo: {
+            type: p.demo?.type === 'iframe' ? 'iframe' : 'builtin',
+            builtin: String(p.demo?.builtin || 'analytics'),
+            url: String(p.demo?.url || '')
+          }
+        }));
+        saveProducts();
+        renderAll();
+        toast('Inventory imported.');
+        e.target.value = '';
+      });
+      el('resetBtn').addEventListener('click', () => {
+        if (!confirm('Reset inventory to defaults? This will overwrite your local changes.')) return;
+        products = structuredClone(DEFAULT_PRODUCTS);
+        saveProducts();
+        renderAll();
+        toast('Reset complete.');
+      });
+      // Contact form (demo)
+      el('contactForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        toast('Message captured (demo). Connect to your backend to send emails.');
+        e.target.reset();
+      });
+      renderAll();
+    });
+  </script>
+</body>
+</html>
